@@ -1,6 +1,6 @@
 .container {
   grid-area: top;
-  box-shadow: var(--shadow-separator);
+  border: 1px solid var(--border);
   padding: 1%;
   display: flex;
   align-items: center;

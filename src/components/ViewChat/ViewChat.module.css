@@ -1,0 +1,118 @@
+.container {
+  grid-area: opened;
+  overflow-y: scroll;
+  /* background: url('/doodle2.svg'); */
+  position: relative;
+}
+.getStarted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+.titleChat {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1%;
+  position: absolute;
+  backdrop-filter: blur(10px);
+  background-color: #14323daa;
+  padding: 2.5% 1%;
+  z-index: 2;
+}
+.contactInfo {
+  display: flex;
+  gap: 5%;
+  align-items: center;
+}
+.closeChat {
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.closeChat:hover {
+  font-size: 1.25rem;
+}
+.containerMessages {
+  overflow-y: auto;
+  padding: calc(50px + 1%) 0 calc(50px + 1%) 0;
+  height: 100%;
+}
+.boxMessage {
+  width: 100%;
+  display: flex;
+  margin: 1% 0;
+  padding: 0 1%;
+}
+.message {
+  background-color: var(--font-color);
+  padding: 1%;
+  width: max-content;
+  border-radius: 10px;
+  max-width: 80%;
+  position: relative;
+  opacity: 0;
+  animation: messages 1s forwards;
+  display: flex;
+  flex-direction: column;
+}
+.timeStamp {
+  font-size: 0.75rem;
+}
+.myBoxMessages {
+  justify-content: flex-end;
+}
+.yourBoxMessages {
+  justify-content: flex-start;
+}
+.myMessages {
+  background-color: var(--primary);
+}
+.yourMessages {
+  background-color: var(--secondary);
+}
+
+.myMessages::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--primary) transparent transparent transparent;
+}
+.yourMessages::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--secondary) transparent transparent transparent;
+}
+
+.form {
+  display: flex;
+  padding: 1%;
+  gap: 1%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 75px;
+}
+
+@keyframes messages {
+  from {
+    scale: 0.8;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}

@@ -1,9 +1,18 @@
 import styles from './ItemChat.module.css';
 import Image from 'next/image';
 
-export const ItemChat = () => {
+type ItemChatProps = React.ComponentProps<'div'> & {
+  nameContact: string;
+  lastMessage?: string;
+};
+
+export const ItemChat = ({
+  nameContact,
+  lastMessage,
+  ...props
+}: ItemChatProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} {...props}>
       <Image
         src={'/user.png'}
         height={50}
@@ -11,11 +20,8 @@ export const ItemChat = () => {
         alt='Foto de perfil dos usuários'
       />
       <div className={styles.boxTextItem}>
-        <p className={styles.nameContact}>Samuel</p>
-        <p className={styles.previewMessage}>
-          Pefil Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum,
-          similique?
-        </p>
+        <p className={styles.nameContact}>{nameContact}</p>
+        <p className={styles.previewMessage}>{lastMessage}</p>
       </div>
     </div>
   );

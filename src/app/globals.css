@@ -3,11 +3,26 @@
   margin: 0;
   box-sizing: border-box;
 }
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background-color: #050f13;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #cccccc11;
+  border-radius: 5px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #37a5ccaa;
+}
 
 :root {
   --primary: #37a5cc;
   --font-color: #ffffff;
+  --font-color-secondary: #cccccc;
   --background: #050f13;
+  --shadow-separator: 1px 1px 1px 1px #cccccc11;
 }
 
 body {

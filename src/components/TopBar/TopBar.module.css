@@ -1,4 +1,12 @@
 .container {
-  background-color: blue;
   grid-area: top;
+  box-shadow: var(--shadow-separator);
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.logoBox {
+  display: flex;
+  align-items: center;
 }

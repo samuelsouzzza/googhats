@@ -1,4 +1,9 @@
 .container {
-  background-color: green;
   grid-area: chats;
+  box-shadow: var(--shadow-separator);
+  padding: 5%;
+  overflow-y: scroll;
+}
+.container h3 {
+  margin: 0 0 5% 0;
 }

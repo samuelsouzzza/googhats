@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import styles from './MyProfile.module.css';
 import React from 'react';
 
@@ -26,8 +26,8 @@ export const MyProfile = () => {
     };
   }, []);
 
-  function openModalSettings() {
-    alert('Abriu o modal de configurações');
+  function logOut() {
+    alert('Encerrou a sessão.');
   }
 
   return (
@@ -44,9 +44,9 @@ export const MyProfile = () => {
         className={`${styles.containerMenu} ${
           activeProfileOptions ? styles.active : ''
         }`}
-        onClick={openModalSettings}
+        onClick={logOut}
       >
-        <FontAwesomeIcon icon={faEllipsis} />
+        <FontAwesomeIcon icon={faCircleXmark} />
       </span>
     </div>
   );

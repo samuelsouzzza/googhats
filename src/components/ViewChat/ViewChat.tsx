@@ -1,7 +1,7 @@
 'use client';
 import styles from './ViewChat.module.css';
 import Image from 'next/image';
-import { InputMessage } from '../InputMessage/InputMessage';
+import { Input } from '../Input/Input';
 import React from 'react';
 import { Button } from '../Button/Button';
 import { POST_MESSAGE } from '@/app/actions/POST_MESSAGE';
@@ -88,11 +88,13 @@ export const ViewChat = ({ open }: ViewChatProps) => {
                 >
                   <p
                     key={i}
-                    className={`${styles.message} ${
-                      m.user === userLogged
-                        ? styles.myMessages
-                        : styles.yourMessages
-                    }`}
+                    className={
+                      `${styles.message} ${
+                        m.user === userLogged
+                          ? styles.myMessages
+                          : styles.yourMessages
+                      }` + ' fadeIn'
+                    }
                     style={{ animationDelay: `${i / 20}s` }}
                   >
                     {m.message}
@@ -111,8 +113,8 @@ export const ViewChat = ({ open }: ViewChatProps) => {
           </div>
           <form action={POST_MESSAGE} className={styles.form}>
             <ToolBar />
-            <InputMessage value={newMessage} setValue={setNewMessage} />
-            <Button type='submit' text='Enviar' />
+            <Input value={newMessage} setValue={setNewMessage} />
+            <Button />
           </form>
         </>
       )}

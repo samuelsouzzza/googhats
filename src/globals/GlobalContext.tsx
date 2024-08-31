@@ -5,6 +5,8 @@ import React from 'react';
 type IScreens = {
   openedChat: IContact | null;
   setOpenedChat: React.Dispatch<React.SetStateAction<IContact | null>>;
+  modalSearchUsers: boolean;
+  setModalSearchUsers: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const GlobalContext = React.createContext<IScreens | null>(null);
@@ -19,12 +21,16 @@ export const GlobalContextProvider = ({
   children,
 }: React.PropsWithChildren) => {
   const [openedChat, setOpenedChat] = React.useState<IContact | null>(null);
+  const [modalSearchUsers, setModalSearchUsers] =
+    React.useState<boolean>(false);
 
   return (
     <GlobalContext.Provider
       value={{
         openedChat,
         setOpenedChat,
+        modalSearchUsers,
+        setModalSearchUsers,
       }}
     >
       {children}

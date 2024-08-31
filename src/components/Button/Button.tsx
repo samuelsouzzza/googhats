@@ -4,10 +4,11 @@ import { useFormStatus } from 'react-dom';
 import styles from './Button.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faHourglass } from '@fortawesome/free-regular-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 type ButtonProps = React.ComponentProps<'button'> & {
   text?: string;
-  icon?: boolean;
+  icon?: IconProp;
 };
 
 export const Button = ({
@@ -21,10 +22,12 @@ export const Button = ({
 
   return (
     <button disabled={pending} className={styles.button} {...props}>
-      {pending ? (
+      {text ? (
+        text
+      ) : pending ? (
         <FontAwesomeIcon icon={faHourglass} spin />
       ) : (
-        <FontAwesomeIcon icon={faPaperPlane} />
+        <FontAwesomeIcon icon={icon ? icon : faPaperPlane} />
       )}
     </button>
   );

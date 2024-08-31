@@ -15,6 +15,10 @@
   outline: 0;
   transition: 0.3s;
 }
-.input:hover {
+.input:hover,
+.input:focus {
   border-color: var(--primary);
+}
+.input::placeholder {
+  color: var(--font-color-secondary);
 }

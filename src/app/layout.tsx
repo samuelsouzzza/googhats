@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import './globals.css';
 import { GlobalContextProvider } from '@/globals/GlobalContext';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 const roboto = Roboto({ weight: '400', subsets: ['latin'] });
 

@@ -4,6 +4,7 @@ import { TopBar } from '@/components/TopBar/TopBar';
 import { Chats } from '@/components/Chats/Chats';
 import { ViewChat } from '@/components/ViewChat/ViewChat';
 import { UseGlobalContext } from '@/globals/GlobalContext';
+import { ModalSearchUsers } from '@/components/ModalSearchUsers/ModalSearchUsers';
 
 export default function Home() {
   const { openedChat } = UseGlobalContext();
@@ -13,6 +14,7 @@ export default function Home() {
       <TopBar />
       <Chats />
       <ViewChat open={openedChat} />
+      <ModalSearchUsers />
     </div>
   );
 }

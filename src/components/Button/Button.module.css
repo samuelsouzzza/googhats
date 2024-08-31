@@ -7,6 +7,12 @@
   cursor: pointer;
   transition: 0.3s;
   font-size: 1rem;
+  width: 10%;
+  height: 100%;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
 }
 .button:hover {
   background-color: var(--font-color);

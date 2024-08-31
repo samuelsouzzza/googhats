@@ -30,3 +30,17 @@ body {
   background-color: var(--background);
   color: var(--font-color);
 }
+
+@keyframes fadeIn {
+  from {
+    scale: 0.8;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s forwards;
+}

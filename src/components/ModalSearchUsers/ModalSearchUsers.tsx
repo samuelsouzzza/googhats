@@ -1,14 +1,19 @@
 'use client';
-
-import styles from './Chats.module.css';
-import { ItemChat } from '../ItemChat/ItemChat';
-import { UseGlobalContext } from '@/globals/GlobalContext';
-import { IContact } from '@/@types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import styles from './ModalSearchUsers.module.css';
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import { Input } from '../Input/Input';
+import React from 'react';
+import { Button } from '../Button/Button';
+import { POST_MESSAGE } from '@/app/actions/POST_MESSAGE';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
+import { UseGlobalContext } from '@/globals/GlobalContext';
 
-export const Chats = () => {
-  const { setOpenedChat, setModalSearchUsers } = UseGlobalContext();
+export const ModalSearchUsers = () => {
+  const [searchUserValue, setSearchUserValue] = React.useState('');
+  const { modalSearchUsers, setModalSearchUsers, setOpenedChat } =
+    UseGlobalContext();
 
   const contacts = [
     {
@@ -154,33 +159,55 @@ export const Chats = () => {
       ].reverse(),
     },
   ];
-
-  function handleClick(open: IContact) {
-    setOpenedChat(open);
+  function openNewChat() {
+    setOpenedChat(contacts[0]);
   }
 
   return (
-    <section className={styles.container}>
-      <div className={styles.box}>
-        <h3>Suas conversas</h3>
-        <FontAwesomeIcon
-          className={styles.btnSearch}
-          icon={faSearch}
-          onClick={() => setModalSearchUsers(true)}
-        />
-      </div>
-      <div>
-        {contacts.map((c, i) => {
-          return (
-            <ItemChat
-              key={i}
-              nameContact={c.contactName}
-              lastMessage={c.messages[0]?.message}
-              onClick={() => handleClick(c)}
-            />
-          );
-        })}
-      </div>
-    </section>
+    <>
+      {modalSearchUsers && (
+        <div className={styles.wrapper}>
+          <div className={styles.container + ' fadeIn'}>
+            <div className={styles.boxTitle}>
+              <h3>Buscar usuários</h3>
+              <FontAwesomeIcon
+                className={styles.closeModal}
+                icon={faCircleXmark}
+                onClick={() => setModalSearchUsers(false)}
+              />
+            </div>
+            <form action={POST_MESSAGE} className={styles.form}>
+              <Input
+                value={searchUserValue}
+                setValue={setSearchUserValue}
+                placeholder='Busque por e-mail ou nome de usuário'
+                style={{ fontSize: '1rem' }}
+              />
+              <Button icon={faSearch} />
+            </form>
+
+            <div className={styles.boxListUsers}>
+              <div className={styles.itemUser}>
+                <div className={styles.infoUser}>
+                  <Image
+                    src={'/user.png'}
+                    height={40}
+                    width={40}
+                    alt='Fotos de perfil dos usuários'
+                  />
+                  <div>
+                    <p>Gustavo</p>
+                    <span className={styles.infoEmail}>
+                      gustavo116@gmail.com
+                    </span>
+                  </div>
+                </div>
+                <Button icon={faPlus} onClick={openNewChat} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };

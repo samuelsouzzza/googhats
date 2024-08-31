@@ -1,18 +1,13 @@
 'use client';
 import React from 'react';
-import styles from './InputMessage.module.css';
+import styles from './Input.module.css';
 
-
-type InputMessageProps = React.ComponentProps<'input'> & {
+type InputProps = React.ComponentProps<'input'> & {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const InputMessage = ({
-  value,
-  setValue,
-  ...props
-}: InputMessageProps) => {
+export const Input = ({ value, setValue, ...props }: InputProps) => {
   const refInputMessage = React.useRef<HTMLInputElement | null>(null);
 
   React.useEffect(() => {

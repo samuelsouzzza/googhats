@@ -153,8 +153,8 @@ export const Chats = () => {
     },
   ];
 
-  function handleClick(contact: IContact) {
-    setOpenedChat(contact);
+  function handleClick(open: IContact) {
+    setOpenedChat(open);
   }
 
   return (

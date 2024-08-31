@@ -1,10 +1,10 @@
 .container {
   grid-area: top;
   border: 1px solid var(--border);
-  padding: 1%;
+  padding: 5%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .logoBox {
   display: flex;

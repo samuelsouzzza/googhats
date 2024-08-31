@@ -12,7 +12,7 @@ export default function Home() {
     <div className={styles.wrapper}>
       <TopBar />
       <Chats />
-      <ViewChat contact={openedChat} />
+      <ViewChat open={openedChat} />
     </div>
   );
 }

@@ -9,30 +9,27 @@ import { IContact } from '@/@types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { UseGlobalContext } from '@/globals/GlobalContext';
+import { ToolBar } from '../ToolBar/ToolBar';
 
 const userLogged = 'Samuel';
 
 type ViewChatProps = {
-  contact: IContact | null;
+  open: IContact | null;
 };
 
-export const ViewChat = ({ contact }: ViewChatProps) => {
+export const ViewChat = ({ open }: ViewChatProps) => {
   const { setOpenedChat } = UseGlobalContext();
   const refBox = React.useRef<HTMLDivElement | null>(null);
   const refBoxLastMessage = React.useRef<HTMLDivElement | null>(null);
   const [newMessage, setNewMessage] = React.useState('');
 
   React.useEffect(() => {
-    const endSection = refBox.current as HTMLDivElement;
-    endSection.scrollTo({
-      top: endSection.scrollHeight,
-      behavior: 'smooth',
-    });
-  }, []);
+    refBoxLastMessage.current?.scrollIntoView();
+  }, [open, open?.messages]);
 
   React.useEffect(() => {
     function handleListener(e: KeyboardEvent) {
-      if (e.key === 'enter') POST_MESSAGE;
+      if (e.key === 'Enter') POST_MESSAGE;
     }
 
     window.addEventListener('keydown', handleListener);
@@ -44,17 +41,17 @@ export const ViewChat = ({ contact }: ViewChatProps) => {
     <section
       ref={refBox}
       className={styles.container}
-      style={{ backgroundImage: contact ? `url('/doodle2.svg')` : '' }}
+      style={{ backgroundImage: open ? `url('/doodle2.svg')` : '' }}
     >
-      {!contact ? (
+      {!open ? (
         <div className={styles.getStarted}>
           <Image
-            src={'/home.png'}
+            src={'/conversando.png'}
             width={100}
             height={100}
             alt='Ilustração de uma casa'
           />
-          <p>Inicie ou entre em uma conversa</p>
+          <p>Inicie ou entre em alguma conversa</p>
         </div>
       ) : (
         <>
@@ -66,7 +63,7 @@ export const ViewChat = ({ contact }: ViewChatProps) => {
                 width={50}
                 alt='Foto de perfil do contato com conversa aberta'
               />
-              <h3>{contact?.contactName}</h3>
+              <h3>{open?.contactName}</h3>
             </div>
             <FontAwesomeIcon
               icon={faCircleXmark}
@@ -75,41 +72,45 @@ export const ViewChat = ({ contact }: ViewChatProps) => {
             />
           </div>
           <div className={styles.containerMessages}>
-            {contact?.messages?.map((m, i) => (
-              <div
-                ref={refBoxLastMessage}
-                key={i}
-                className={`${styles.boxMessage}
+            {open?.messages
+              ?.slice()
+              .reverse()
+              .map((m, i, arr) => (
+                <div
+                  ref={i === arr.length - 1 ? refBoxLastMessage : null}
+                  key={`${open?.contactName}-${i}`}
+                  className={`${styles.boxMessage}
             ${
               m.user === userLogged
                 ? styles.myBoxMessages
                 : styles.yourBoxMessages
             }`}
-              >
-                <p
-                  key={i}
-                  className={`${styles.message} ${
-                    m.user === userLogged
-                      ? styles.myMessages
-                      : styles.yourMessages
-                  }`}
-                  style={{ animationDelay: `${i / 5}s` }}
                 >
-                  {m.message}
-                  <span
-                    className={styles.timeStamp}
-                    style={{
-                      alignSelf:
-                        m.user === userLogged ? 'flex-end' : 'flex-start',
-                    }}
+                  <p
+                    key={i}
+                    className={`${styles.message} ${
+                      m.user === userLogged
+                        ? styles.myMessages
+                        : styles.yourMessages
+                    }`}
+                    style={{ animationDelay: `${i / 20}s` }}
                   >
-                    {m.timeStamp}
-                  </span>
-                </p>
-              </div>
-            ))}
+                    {m.message}
+                    <span
+                      className={styles.timeStamp}
+                      style={{
+                        alignSelf:
+                          m.user === userLogged ? 'flex-end' : 'flex-start',
+                      }}
+                    >
+                      {m.timeStamp}
+                    </span>
+                  </p>
+                </div>
+              ))}
           </div>
           <form action={POST_MESSAGE} className={styles.form}>
+            <ToolBar />
             <InputMessage value={newMessage} setValue={setNewMessage} />
             <Button type='submit' text='Enviar' />
           </form>

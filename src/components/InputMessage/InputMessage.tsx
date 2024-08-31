@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './InputMessage.module.css';
 
+
 type InputMessageProps = React.ComponentProps<'input'> & {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;

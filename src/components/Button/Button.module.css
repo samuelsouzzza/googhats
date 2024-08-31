@@ -18,6 +18,5 @@
 .button:disabled {
   background-color: var(--border);
   color: var(--font-color-secondary);
-  font-size: 1rem;
   cursor: not-allowed;
 }

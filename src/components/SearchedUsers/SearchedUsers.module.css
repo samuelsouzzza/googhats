@@ -1,0 +1,38 @@
+.itemUser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin: 0 0 2% 0;
+  padding: 2%;
+  cursor: pointer;
+  border-radius: 10px;
+  opacity: 0;
+}
+.itemUser:hover {
+  background-color: var(--border);
+}
+.infoUser {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5%;
+  color: #fff;
+}
+.infoEmail {
+  font-size: 0.75rem;
+  color: var(--font-color-secondary);
+}
+.startChat {
+  background-color: var(--primary);
+  width: 100%;
+}
+.imgProfile {
+  border-radius: 50px;
+  object-fit: cover;
+}
+.error {
+  width: 100%;
+  text-align: center;
+}

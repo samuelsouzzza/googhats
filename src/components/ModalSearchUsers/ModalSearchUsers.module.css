@@ -15,8 +15,9 @@
   background-color: var(--background);
   box-shadow: 1px 1px 10px 1px var(--border);
   width: 30%;
+  height: min-content;
   max-height: 70%;
-  height: auto;
+  overflow-y: scroll;
 }
 .boxTitle {
   display: flex;

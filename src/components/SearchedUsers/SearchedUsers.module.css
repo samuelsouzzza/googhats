@@ -18,15 +18,12 @@
   align-items: center;
   justify-content: flex-start;
   gap: 5%;
-  color: #fff;
+  color: var(--font-color);
+  width: 100%;
 }
 .infoEmail {
   font-size: 0.75rem;
   color: var(--font-color-secondary);
-}
-.startChat {
-  background-color: var(--primary);
-  width: 100%;
 }
 .imgProfile {
   border-radius: 50px;
@@ -35,4 +32,9 @@
 .error {
   width: 100%;
   text-align: center;
+}
+.form {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }

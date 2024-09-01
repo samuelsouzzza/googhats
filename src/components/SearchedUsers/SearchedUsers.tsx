@@ -6,6 +6,9 @@ import { Button } from '../Button/Button';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import useSWR from 'swr';
 import { Loader } from '../Loader/Loader';
+import { POST_CHAT } from '@/app/actions/POST_CHAT';
+import { UseGlobalContext } from '@/globals/GlobalContext';
+import React from 'react';
 
 type SearchedUsersProps = {
   fetchPath: string;
@@ -19,6 +22,18 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
     `${fetchPath}`,
     getUsers
   );
+
+  const { userLogged, setModalSearchUsers } = UseGlobalContext();
+
+  async function handleNewChat(userId: string) {
+    const data: { myId: string; yourId: string } = {
+      myId: userLogged?._id as string,
+      yourId: userId,
+    };
+
+    await POST_CHAT(data);
+    setModalSearchUsers(false);
+  }
 
   return (
     <>
@@ -51,10 +66,16 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
                 <span className={styles.infoEmail}>{d.email}</span>
               </div>
             </div>
-            <Button
-              icon={faPlus}
-              //   onClick={openNewChat}
-            />
+            <form action={() => handleNewChat(d._id)} className={styles.form}>
+              <Button
+                icon={faPlus}
+                style={{
+                  padding: '5%',
+                  width: '25%',
+                }}
+                type='submit'
+              />
+            </form>
           </div>
         );
       })}

@@ -1,7 +1,8 @@
 'use server';
-export const POST_CHAT = async (data: { myId: string; yourId: string }) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
 
+import { mutate } from 'swr';
+
+export const POST_CHAT = async (data: { myId: string; yourId: string }) => {
   try {
     await fetch(`http://localhost:3333/newChat`, {
       method: 'POST',
@@ -10,6 +11,8 @@ export const POST_CHAT = async (data: { myId: string; yourId: string }) => {
       },
       body: JSON.stringify(data),
     });
+
+    // await mutate(`http://localhost:3333/chats/${data.myId}`);
   } catch (err) {
     if (err instanceof Error)
       console.log('Não foi possível criar a conversa.', err.message);

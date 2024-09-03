@@ -1,10 +1,10 @@
 'use client';
-import { IContact, IUser } from '@/@types/types';
+import { IChat, IUser } from '@/@types/types';
 import React from 'react';
 
 type IScreens = {
-  openedChat: IContact | null;
-  setOpenedChat: React.Dispatch<React.SetStateAction<IContact | null>>;
+  openedChat: IChat | null;
+  setOpenedChat: React.Dispatch<React.SetStateAction<IChat | null>>;
   modalSearchUsers: boolean;
   setModalSearchUsers: React.Dispatch<React.SetStateAction<boolean>>;
   userLogged: IUser | null;
@@ -22,7 +22,7 @@ export const UseGlobalContext = () => {
 export const GlobalContextProvider = ({
   children,
 }: React.PropsWithChildren) => {
-  const [openedChat, setOpenedChat] = React.useState<IContact | null>(null);
+  const [openedChat, setOpenedChat] = React.useState<IChat | null>(null);
   const [modalSearchUsers, setModalSearchUsers] =
     React.useState<boolean>(false);
 

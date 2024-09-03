@@ -7,13 +7,20 @@
 .box {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin: 0 0 5% 0;
+  padding: 0 2%;
 }
-.btnSearch {
+.btnTools {
   transition: 0.3s;
   cursor: pointer;
+  color: var(--font-color-secondary);
 }
-.btnSearch:hover {
+.btnTools:hover {
   scale: 1.25;
+}
+.boxTools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20%;
 }

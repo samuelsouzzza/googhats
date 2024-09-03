@@ -1,8 +1,3 @@
-export interface IContact {
-  contactName: string;
-  messages?: any[];
-}
-
 export interface IUser {
   _id: string;
   name: string;
@@ -10,4 +5,19 @@ export interface IUser {
   profilePic: string;
   status: 'online' | 'offline';
   lastAcess: Date;
+}
+
+export interface IMessage {
+  senderId: string;
+  text: string;
+  sentAt: Date;
+  readBy: string[];
+}
+
+export interface IChat {
+  _id: string;
+  participants: IUser[];
+  messages: IMessage[];
+  createdAt: Date;
+  updatedAt: Date;
 }

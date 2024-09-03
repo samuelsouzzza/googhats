@@ -1,13 +1,25 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0 5%;
+}
 .container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1%;
+}
+.img {
+  border-radius: 100px;
+  object-fit: cover;
 }
 .containerMenu {
   display: none;
 }
 .containerMenu.active {
+  opacity: 0;
   transform: 0.3s;
   position: absolute;
   top: 0;
@@ -20,4 +32,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }

@@ -20,7 +20,7 @@ export const Chats = () => {
     `http://localhost:3333/chats/${userLogged?._id}`,
     getChats,
     {
-      refreshInterval: 5000,
+      refreshInterval: 3000,
       revalidateOnReconnect: true,
       revalidateIfStale: true,
       refreshWhenHidden: true,
@@ -46,19 +46,27 @@ export const Chats = () => {
       </div>
       <h3>Suas conversas</h3>
       <div>
-        {isLoading && <Loader />}
-        {error && <p>Não foi possível buscar as conversas</p>}
-        {data
-          ?.slice()
-          .reverse()
-          .map((d, i) => (
-            <ItemChat
-              key={i}
-              data={d}
-              onClick={() => handleClick(d)}
-              style={{ animationDelay: `${i / 10}s` }}
-            />
-          ))}
+        <>
+          {isLoading && <Loader />}
+          {error && <p>Não foi possível buscar as conversas</p>}
+          {data
+            ?.slice()
+            .reverse()
+            .sort((a, b) => {
+              const dateA = new Date(a.updatedAt);
+              const dateB = new Date(b.updatedAt);
+              const timeDiff = dateB.getTime() - dateA.getTime();
+              return timeDiff;
+            })
+            .map((d, i) => (
+              <ItemChat
+                key={d._id}
+                data={d}
+                onClick={() => handleClick(d)}
+                style={{ animationDelay: `${i / 10}s` }}
+              />
+            ))}
+        </>
       </div>
     </section>
   );

@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1%;
+  padding: 2%;
 }
 .img {
   border-radius: 100px;
@@ -19,6 +19,7 @@
   display: none;
 }
 .containerMenu.active {
+  border-radius: 100px;
   opacity: 0;
   transform: 0.3s;
   position: absolute;

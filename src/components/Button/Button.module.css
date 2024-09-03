@@ -1,5 +1,6 @@
 .button {
-  background-color: var(--background);
+  background-color: var(--border);
+  backdrop-filter: blur(10px);
   color: var(--font-color);
   padding: 1%;
   border-radius: 10px;

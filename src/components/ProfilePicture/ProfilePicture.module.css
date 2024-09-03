@@ -1,0 +1,19 @@
+.container {
+  width: max-content;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo {
+  border-radius: 100px;
+  object-fit: cover;
+}
+.status {
+  width: 20%;
+  aspect-ratio: 1/1;
+  position: absolute;
+  border-radius: 50px;
+  bottom: 7%;
+  right: 5%;
+}

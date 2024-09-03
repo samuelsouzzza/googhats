@@ -9,6 +9,7 @@ import { Loader } from '../Loader/Loader';
 import { POST_CHAT } from '@/app/actions/POST_CHAT';
 import { UseGlobalContext } from '@/globals/GlobalContext';
 import React from 'react';
+import { ProfilePicture } from '../ProfilePicture/ProfilePicture';
 
 type SearchedUsersProps = {
   fetchPath: string;
@@ -52,14 +53,10 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
             key={d._id}
           >
             <div className={styles.infoUser}>
-              <Image
-                className={styles.imgProfile}
-                src={`${d.profilePic}`}
-                height={40}
-                width={40}
-                alt='Fotos de perfil dos usuários'
-                placeholder='blur'
-                blurDataURL={d.profilePic}
+              <ProfilePicture
+                path={`${d.profilePic}`}
+                online={d.online}
+                size={40}
               />
               <div>
                 <p>{d.name}</p>
@@ -73,7 +70,6 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
                   padding: '5%',
                   width: '25%',
                 }}
-                type='submit'
               />
             </form>
           </div>

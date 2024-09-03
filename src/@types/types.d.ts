@@ -3,7 +3,7 @@ export interface IUser {
   name: string;
   email: string;
   profilePic: string;
-  status: 'online' | 'offline';
+  online: boolean;
   lastAcess: Date;
 }
 

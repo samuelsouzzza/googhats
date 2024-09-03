@@ -13,16 +13,17 @@
   flex-direction: column;
 }
 .titleChat {
+  grid-area: opened;
   height: 75px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1%;
-  position: fixed;
+  position: absolute;
   backdrop-filter: blur(10px);
   background-color: var(--border);
-  padding: 2.5% 1%;
+  padding: 2.5% 2%;
   z-index: 2;
 }
 .imgProfile {
@@ -33,12 +34,35 @@
   gap: 5%;
   align-items: center;
 }
+.statusOnline {
+  color: var(--font-color-secondary);
+  font-size: 0.8rem;
+}
 .closeChat {
   font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
 }
-.closeChat:hover {
+.boxControls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5%;
+  width: 100%;
+}
+.boxCallers {
+  display: flex;
+  gap: 3%;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  cursor: pointer;
+}
+.itemCaller {
+  transition: 0.3s;
+}
+.closeChat:hover,
+.itemCaller:hover {
   font-size: 1.25rem;
 }
 .containerMessages {
@@ -52,6 +76,23 @@
   margin-top: 1%;
   padding: 0 1%;
 }
+.boxDateGrouped {
+  display: flex;
+  flex-direction: column;
+}
+.dateGrouped {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2% 0;
+  width: 100%;
+}
+.dateGrouped p {
+  background-color: var(--border);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 1%;
+}
 .message {
   background-color: var(--font-color);
   padding: 1%;
@@ -62,6 +103,7 @@
   opacity: 0;
   display: flex;
   flex-direction: column;
+  word-break: break-all;
 }
 .timeStamp {
   font-size: 0.6rem;
@@ -100,12 +142,14 @@
 
 .form {
   display: flex;
-  padding: 1%;
+  padding: 1% 2%;
   gap: 1%;
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 75px;
+  background-color: var(--border);
+  backdrop-filter: blur(10px);
 }
 .wrapperWelcome {
   width: 100%;

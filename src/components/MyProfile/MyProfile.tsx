@@ -4,6 +4,7 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import styles from './MyProfile.module.css';
 import React from 'react';
 import { UseGlobalContext } from '@/globals/GlobalContext';
+import { ProfilePicture } from '../ProfilePicture/ProfilePicture';
 
 export const MyProfile = ({ name }: { name?: boolean }) => {
   const refProfile = React.useRef<HTMLImageElement | null>(null);

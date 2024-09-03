@@ -27,12 +27,12 @@ export const GlobalContextProvider = ({
     React.useState<boolean>(false);
 
   const [userLogged, setUserLogged] = React.useState<IUser | null>({
-    _id: '66d42e73e7d13e3d2f4fcc7c',
+    _id: '66d6b207cad19a9728a13ea6',
     name: 'Samuel',
     email: 'rssamuel17@gmail.com',
     profilePic:
       'https://www.vie-aesthetics.com/wp-content/uploads/2021/09/shutterstock_1877631178-1024x683.jpg',
-    status: 'online',
+    online: true,
     lastAcess: new Date(),
   });
 

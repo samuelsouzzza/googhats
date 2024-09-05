@@ -40,41 +40,62 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
     <>
       {isLoading && <Loader />}
       {!isLoading && error && (
-        <p className={styles.error}>Não foi possível buscar os usuários.</p>
+        <div>
+          <Image
+            src={'/error.gif'}
+            width={100}
+            height={100}
+            alt='Animação'
+            className='fadeIn'
+          />
+          <p>Não foi possível buscar os usuários.</p>
+        </div>
       )}
       {data && data?.length < 1 && (
-        <p className={styles.error}>Nenhum usuário encontrado.</p>
+        <div className={styles.boxErrors}>
+          <Image
+            src={'/not-found.gif'}
+            width={100}
+            height={100}
+            alt='Animação'
+            className='fadeIn'
+          />
+          <p>Nenhum usuário encontrado.</p>
+        </div>
       )}
-      {data?.map((d, i) => {
-        return (
-          <div
-            className={`${styles.itemUser} fadeIn`}
-            style={{ animationDelay: `${i / 5}s` }}
-            key={d._id}
-          >
-            <div className={styles.infoUser}>
-              <ProfilePicture
-                path={`${d.profilePic}`}
-                online={d.online}
-                size={40}
-              />
-              <div>
-                <p>{d.name}</p>
-                <span className={styles.infoEmail}>{d.email}</span>
+      {data
+        ?.sort((a, b) => (a.name > b.name ? 1 : -1))
+        ?.map((d, i) => {
+          return (
+            <div
+              className={`${styles.container} fadeIn`}
+              style={{ animationDelay: `${i / 5}s` }}
+            >
+              <div className={styles.itemUser} key={d._id}>
+                <div className={styles.infoUser}>
+                  <ProfilePicture
+                    path={`${d.profilePic}`}
+                    online={d.online}
+                    size={40}
+                  />
+                  <div>
+                    <p>{d.name}</p>
+                    <span className={styles.infoEmail}>{d.email}</span>
+                  </div>
+                </div>
               </div>
+              <form action={() => handleNewChat(d._id)} className={styles.form}>
+                <Button
+                  icon={faPlus}
+                  style={{
+                    padding: '2%',
+                    width: '100%',
+                  }}
+                />
+              </form>
             </div>
-            <form action={() => handleNewChat(d._id)} className={styles.form}>
-              <Button
-                icon={faPlus}
-                style={{
-                  padding: '5%',
-                  width: '25%',
-                }}
-              />
-            </form>
-          </div>
-        );
-      })}
+          );
+        })}
     </>
   );
 };

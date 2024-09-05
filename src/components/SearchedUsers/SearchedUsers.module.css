@@ -1,3 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  background-color: var(--background);
+  margin: 2% 0;
+  border-radius: 10px;
+  transition: 0.3s;
+  opacity: 0;
+}
+.container:hover {
+  background-color: var(--border);
+}
 .itemUser {
   display: flex;
   align-items: center;
@@ -5,14 +19,9 @@
   width: 100%;
   height: 100%;
   margin: 0 0 2% 0;
-  padding: 2%;
-  cursor: pointer;
   border-radius: 10px;
-  opacity: 0;
 }
-.itemUser:hover {
-  background-color: var(--border);
-}
+
 .infoUser {
   display: flex;
   align-items: center;
@@ -21,6 +30,7 @@
   color: var(--font-color);
   width: 100%;
 }
+
 .infoEmail {
   font-size: 0.75rem;
   color: var(--font-color-secondary);
@@ -29,12 +39,18 @@
   border-radius: 50px;
   object-fit: cover;
 }
-.error {
+.boxErrors {
   width: 100%;
-  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .form {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
 }

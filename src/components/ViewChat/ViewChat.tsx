@@ -6,14 +6,22 @@ import React from 'react';
 import { Button } from '../Button/Button';
 import { POST_MESSAGE } from '@/app/actions/POST_MESSAGE';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCircleXmark,
+  faXmarkCircle,
+} from '@fortawesome/free-regular-svg-icons';
 import { UseGlobalContext } from '@/globals/GlobalContext';
 import { ToolBar } from '../ToolBar/ToolBar';
 import { IChat, IMessage } from '@/@types/types';
 import useSWR from 'swr';
 import { Loader } from '../Loader/Loader';
 import { ProfilePicture } from '../ProfilePicture/ProfilePicture';
-import { faPhone, faVideo } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEllipsis,
+  faEraser,
+  faPhone,
+  faVideo,
+} from '@fortawesome/free-solid-svg-icons';
 import { formatDateChat } from '@/utils/formatDateChat';
 import { MagicMotion } from 'react-magic-motion';
 
@@ -74,6 +82,7 @@ export const ViewChat = ({ open }: ViewChatProps) => {
         <div className={styles.getStarted}>
           <Image
             src={'/welcome.gif'}
+            unoptimized
             width={150}
             height={150}
             alt='Ilustração de uma casa'
@@ -101,13 +110,15 @@ export const ViewChat = ({ open }: ViewChatProps) => {
               </div>
             </div>
             <div className={styles.boxControls}>
-              <div className={styles.boxCallers}>
-                <FontAwesomeIcon icon={faPhone} className={styles.itemCaller} />
-                <FontAwesomeIcon icon={faVideo} className={styles.itemCaller} />
-              </div>
+              <FontAwesomeIcon icon={faPhone} className={styles.itemControls} />
+              <FontAwesomeIcon icon={faVideo} className={styles.itemControls} />
               <FontAwesomeIcon
-                icon={faCircleXmark}
-                className={styles.closeChat}
+                icon={faEraser}
+                className={styles.itemControls}
+              />
+              <FontAwesomeIcon
+                icon={faXmarkCircle}
+                className={styles.itemControls}
                 onClick={() => setOpenedChat(null)}
               />
             </div>
@@ -134,6 +145,7 @@ export const ViewChat = ({ open }: ViewChatProps) => {
                         width={100}
                         height={100}
                         alt='Ícone de saudação'
+                        unoptimized
                       />
                       <p>{`Diga "Olá, ${data?.participants[1].name}!"`}</p>
                     </div>

@@ -4,6 +4,11 @@
   overflow-y: scroll;
   border-right: 1px solid var(--border);
 }
+.menus {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
 .box {
   display: flex;
   justify-content: space-between;
@@ -13,7 +18,6 @@
 .btnTools {
   transition: 0.3s;
   cursor: pointer;
-  color: var(--font-color-secondary);
 }
 .btnTools:hover {
   scale: 1.25;
@@ -22,5 +26,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20%;
+  width: 20%;
+  gap: 5%;
+}
+.boxErrors {
+  margin: 5% 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.boxErrors p {
+  text-align: center;
 }

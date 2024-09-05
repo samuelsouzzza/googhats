@@ -1,0 +1,58 @@
+.container {
+  position: absolute;
+  grid-area: chats;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 3% 1%;
+  animation: fadeInLeftToRight 0.3s forwards;
+  background-color: var(--background);
+  z-index: 3;
+  opacity: 0;
+}
+
+.boxTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 5% 0;
+}
+.closeModal {
+  transition: 0.3s;
+  cursor: pointer;
+}
+.closeModal:hover {
+  scale: 1.25;
+}
+.form {
+  display: flex;
+  gap: 2%;
+  align-items: center;
+  margin: 0 0 5% 0;
+}
+.boxListUsers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@keyframes fadeInLeftToRight {
+  from {
+    transform: translate(-100px, 0);
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+@keyframes fadeOutRightToLeft {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-100px, 0);
+    opacity: 0;
+  }
+}

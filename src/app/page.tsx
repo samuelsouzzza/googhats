@@ -14,7 +14,7 @@ export default function Home() {
       <TopBar />
       <Chats />
       <ViewChat open={openedChat} />
-      <ModalSearchUsers />
+    
     </div>
   );
 }

@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 1.25rem;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -47,23 +47,16 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 5%;
-  width: 100%;
+  gap: 2%;
 }
-.boxCallers {
-  display: flex;
-  gap: 3%;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
+.itemControls {
   cursor: pointer;
-}
-.itemCaller {
   transition: 0.3s;
+  margin: 0 15%;
 }
-.closeChat:hover,
-.itemCaller:hover {
-  font-size: 1.25rem;
+
+.itemControls:hover {
+  scale: 1.25;
 }
 .containerMessages {
   overflow-y: auto;

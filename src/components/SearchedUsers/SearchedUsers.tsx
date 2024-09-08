@@ -24,7 +24,7 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
     getUsers
   );
 
-  const { userLogged, setModalSearchUsers } = UseGlobalContext();
+  const { userLogged, setMenuSearchUsers } = UseGlobalContext();
 
   async function handleNewChat(userId: string) {
     const data: { myId: string; yourId: string } = {
@@ -33,18 +33,18 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
     };
 
     await POST_CHAT(data);
-    setModalSearchUsers(false);
+    setMenuSearchUsers(false);
   }
 
   return (
     <>
       {isLoading && <Loader />}
       {!isLoading && error && (
-        <div>
+        <div className={styles.boxErrors}>
           <Image
             src={'/error.gif'}
-            width={100}
-            height={100}
+            width={50}
+            height={50}
             alt='Animação'
             className='fadeIn'
           />
@@ -68,10 +68,11 @@ export const SearchedUsers = ({ fetchPath }: SearchedUsersProps) => {
         ?.map((d, i) => {
           return (
             <div
+              key={d._id}
               className={`${styles.container} fadeIn`}
               style={{ animationDelay: `${i / 5}s` }}
             >
-              <div className={styles.itemUser} key={d._id}>
+              <div className={styles.itemUser}>
                 <div className={styles.infoUser}>
                   <ProfilePicture
                     path={`${d.profilePic}`}

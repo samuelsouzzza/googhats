@@ -9,19 +9,19 @@ import { SearchedUsers } from '../SearchedUsers/SearchedUsers';
 
 export const MenuSearchUsers = () => {
   const [searchUserValue, setSearchUserValue] = React.useState('');
-  const { modalSearchUsers, setModalSearchUsers, userLogged } =
+  const { menuSearchUsers, setMenuSearchUsers, userLogged } =
     UseGlobalContext();
 
   return (
     <>
-      {modalSearchUsers && (
+      {menuSearchUsers && (
         <div className={styles.container}>
           <div className={styles.boxTitle}>
             <h3>Buscar usuários</h3>
             <FontAwesomeIcon
               className={styles.closeModal}
               icon={faCircleXmark}
-              onClick={() => setModalSearchUsers(false)}
+              onClick={() => setMenuSearchUsers(false)}
             />
           </div>
           <form action='#' className={styles.form}>

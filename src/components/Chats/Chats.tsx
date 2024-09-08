@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import styles from './Chats.module.css';
 import { ItemChat } from '../ItemChat/ItemChat';
 import { UseGlobalContext } from '@/globals/GlobalContext';
@@ -13,20 +13,17 @@ import Image from 'next/image';
 import { MenuSearchUsers } from '../ModalSearchUsers/MenuSearchUsers';
 
 export const Chats = () => {
-  const { setOpenedChat, setModalSearchUsers, modalSearchUsers, userLogged } =
+  const { setOpenedChat, setMenuSearchUsers, menuSearchUsers, userLogged } =
     UseGlobalContext();
 
   const getChats = (...args: Parameters<typeof fetch>) =>
     fetch(...args).then((res) => res.json());
 
-  const { data, isLoading, error, isValidating } = useSWR<IChat[] | null>(
-    `http://localhost:3333/chats/${userLogged?._id}`,
+  const { data, isLoading, error } = useSWR<IChat[] | null>(
+    userLogged?._id ? `http://localhost:3333/chats/${userLogged._id}` : null,
     getChats,
     {
       refreshInterval: 3000,
-      revalidateOnReconnect: true,
-      revalidateIfStale: true,
-      refreshWhenHidden: true,
     }
   );
 
@@ -34,14 +31,14 @@ export const Chats = () => {
     <>
       <section className={styles.container}>
         <div className={styles.menus}>
-          {modalSearchUsers && <MenuSearchUsers />}
+          {menuSearchUsers && <MenuSearchUsers />}
           <div className={styles.box}>
             <MyProfile name />
             <div className={styles.boxTools}>
               <FontAwesomeIcon
                 className={styles.btnTools}
                 icon={faSearch}
-                onClick={() => setModalSearchUsers(true)}
+                onClick={() => setMenuSearchUsers(true)}
               />
               <FontAwesomeIcon className={styles.btnTools} icon={faGear} />
             </div>

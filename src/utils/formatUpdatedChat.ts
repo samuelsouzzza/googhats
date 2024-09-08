@@ -1,4 +1,5 @@
-export const formatUpdatedChat = (date?: Date) => {
+export const formatUpdatedChat = (date: Date) => {
+  // console.log(date);
   if (date) {
     const realDate = new Date(date);
     const now = new Date();

@@ -4,17 +4,21 @@ import { TopBar } from '@/components/TopBar/TopBar';
 import { Chats } from '@/components/Chats/Chats';
 import { ViewChat } from '@/components/ViewChat/ViewChat';
 import { UseGlobalContext } from '@/globals/GlobalContext';
-import { ModalSearchUsers } from '@/components/ModalSearchUsers/ModalSearchUsers';
+import React from 'react';
+import { redirectPath } from '@/utils/redirectPath';
 
 export default function Home() {
-  const { openedChat } = UseGlobalContext();
+  const { openedChat, userLogged } = UseGlobalContext();
+
+  React.useEffect(() => {
+    if (!userLogged) redirectPath('/auth');
+  }, [userLogged]);
 
   return (
     <div className={styles.wrapper}>
       <TopBar />
       <Chats />
       <ViewChat open={openedChat} />
-    
     </div>
   );
 }

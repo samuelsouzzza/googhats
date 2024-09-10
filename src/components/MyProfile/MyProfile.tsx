@@ -8,7 +8,7 @@ import React from 'react';
 import { UseGlobalContext } from '@/globals/GlobalContext';
 import { CLEAN_TOKEN } from '@/app/actions/CLEAN_TOKEN';
 import { verifySession } from '@/utils/verifySession';
-import { POST_STATUS } from '@/app/actions/POST_STATUS';
+import { PUT_STATUS } from '@/app/actions/PUT_STATUS';
 
 export const MyProfile = ({ name }: { name?: boolean }) => {
   const refProfile = React.useRef<HTMLImageElement | null>(null);
@@ -38,7 +38,7 @@ export const MyProfile = ({ name }: { name?: boolean }) => {
   }, []);
 
   async function logOut() {
-    await POST_STATUS(userLogged?._id as string, false);
+    await PUT_STATUS(userLogged?._id as string, false);
     CLEAN_TOKEN();
     verifySession();
   }

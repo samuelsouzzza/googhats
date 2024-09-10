@@ -1,5 +1,5 @@
 'use client';
-import { IChat, IUser } from '@/@types/types';
+import { IChat, IModalActions, IUser } from '@/@types/types';
 import React from 'react';
 
 type IScreens = {
@@ -9,6 +9,8 @@ type IScreens = {
   setMenuSearchUsers: React.Dispatch<React.SetStateAction<boolean>>;
   userLogged: IUser | null;
   setUserLogged: React.Dispatch<React.SetStateAction<IUser | null>>;
+  modalActions: IModalActions | null;
+  setModalActions: React.Dispatch<React.SetStateAction<IModalActions | null>>;
 };
 
 const GlobalContext = React.createContext<IScreens | null>(null);
@@ -25,6 +27,9 @@ export const GlobalContextProvider = ({
   const [openedChat, setOpenedChat] = React.useState<IChat | null>(null);
   const [menuSearchUsers, setMenuSearchUsers] = React.useState<boolean>(false);
   const [userLogged, setUserLogged] = React.useState<IUser | null>(null);
+  const [modalActions, setModalActions] = React.useState<IModalActions | null>(
+    null
+  );
 
   return (
     <GlobalContext.Provider
@@ -35,6 +40,8 @@ export const GlobalContextProvider = ({
         setMenuSearchUsers,
         userLogged,
         setUserLogged,
+        modalActions,
+        setModalActions,
       }}
     >
       {children}

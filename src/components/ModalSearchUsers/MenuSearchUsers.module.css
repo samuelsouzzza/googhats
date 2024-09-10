@@ -11,6 +11,10 @@
   z-index: 3;
   opacity: 0;
 }
+.fadeOut {
+  background-color: red;
+  opacity: 0;
+}
 
 .boxTitle {
   display: flex;
@@ -24,6 +28,11 @@
 }
 .closeModal:hover {
   scale: 1.25;
+}
+.limitChat {
+  font-size: 0.75rem;
+  margin-bottom: 2%;
+  color: var(--font-color-secondary);
 }
 .form {
   display: flex;

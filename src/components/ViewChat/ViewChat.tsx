@@ -6,33 +6,34 @@ import React from 'react';
 import { Button } from '../Button/Button';
 import { POST_MESSAGE } from '@/app/actions/POST_MESSAGE';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { UseGlobalContext } from '@/globals/GlobalContext';
 import { ToolBar } from '../ToolBar/ToolBar';
 import { IChat, IMessage } from '@/@types/types';
 import useSWR from 'swr';
 import { Loader } from '../Loader/Loader';
 import { ProfilePicture } from '../ProfilePicture/ProfilePicture';
-import { faEraser, faPhone, faVideo } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPhone, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { formatDateChat } from '@/utils/formatDateChat';
-import { MagicMotion } from 'react-magic-motion';
 import { formatUpdatedChat } from '@/utils/formatUpdatedChat';
+import { DELETE_CHAT_MESSAGE } from '@/app/actions/DELETE_CHAT_MESSAGE';
 
 type ViewChatProps = {
   open: IChat | null;
 };
 
 export const ViewChat = ({ open }: ViewChatProps) => {
-  const { setOpenedChat, userLogged } = UseGlobalContext();
+  const { setOpenedChat, userLogged, setModalActions } = UseGlobalContext();
   const refBox = React.useRef<HTMLDivElement | null>(null);
   const refBoxLastMessage = React.useRef<HTMLDivElement | null>(null);
   const [newMessage, setNewMessage] = React.useState('');
+  const [activeInfoMessage, setActiveInfoMessage] = React.useState<
+    string | null
+  >(null);
 
   const otherParticipant = open?.participants.find(
     (p) => p._id !== userLogged?._id
   );
-
-  console.log(open);
 
   const getUniqueChat = (...args: Parameters<typeof fetch>) =>
     fetch(...args).then((res) => res.json());
@@ -60,6 +61,7 @@ export const ViewChat = ({ open }: ViewChatProps) => {
   }, []);
 
   const messagesPerDate = formatDateChat(data?.messages as IMessage[]);
+
   const now = new Date();
   const todayDate = now.toLocaleDateString('pt-BR');
   const yesterday = new Date(now.setDate(now.getDay()));
@@ -72,6 +74,35 @@ export const ViewChat = ({ open }: ViewChatProps) => {
       const dateB = new Date(b.split('/').reverse().join('-'));
       return dateA.getTime() - dateB.getTime();
     });
+
+  function cleanChat(idChat: string, idMessage?: string) {
+    setModalActions(null);
+
+    if (idMessage) DELETE_CHAT_MESSAGE(idChat, idMessage);
+    else {
+      setOpenedChat(null);
+      DELETE_CHAT_MESSAGE(idChat);
+    }
+  }
+
+  function handleClickCleanChat() {
+    console.log('AQIOOOOOOOO', open?._id);
+    setModalActions({
+      icon: faTrashAlt,
+      message: 'Deseja excluir toda esta conversa?',
+      type: 'yes-no',
+      onOk: () => cleanChat(data?._id as string),
+    });
+  }
+
+  function handleClickCleanMessage(idMessage: string) {
+    setModalActions({
+      icon: faTrashAlt,
+      message: 'Deseja apagar esta mensagem?',
+      type: 'yes-no',
+      onOk: () => cleanChat(data?._id as string, idMessage),
+    });
+  }
 
   return (
     <section
@@ -121,10 +152,16 @@ export const ViewChat = ({ open }: ViewChatProps) => {
                   icon={faVideo}
                   className={styles.itemControls}
                 />
-                <FontAwesomeIcon
-                  icon={faEraser}
-                  className={styles.itemControls}
-                />
+                {data?.messages?.length ? (
+                  <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    className={styles.itemControls}
+                    onClick={handleClickCleanChat}
+                  />
+                ) : (
+                  ''
+                )}
+
                 <FontAwesomeIcon
                   icon={faXmarkCircle}
                   className={styles.itemControls}
@@ -135,94 +172,128 @@ export const ViewChat = ({ open }: ViewChatProps) => {
             <div className={styles.containerMessages}>
               {error && <p>Não foi possível buscar a conversa</p>}
               {isLoading && <Loader />}
-              <MagicMotion>
-                <div>
-                  {data?.messages?.length === 0 && (
-                    <div className={styles.wrapperWelcome}>
-                      <div
-                        className={`${styles.boxWelcome} fadeIn`}
-                        onClick={() => {
-                          POST_MESSAGE(
-                            userLogged!._id,
-                            data?.participants[1]._id as string,
-                            `Olá, ${data.participants[1].name}!`
-                          );
-                        }}
-                      >
-                        <Image
-                          src={'/message.gif'}
-                          width={100}
-                          height={100}
-                          alt='Ícone de saudação'
-                          unoptimized
-                        />
-                        <p>{`Diga "Olá, ${data?.participants[1].name}!"`}</p>
-                      </div>
+              <div className={styles.boxMessageWarning}>
+                <div className={styles.messageWarning}>
+                  <p>Atenção!</p>
+                  <p>
+                    Nosso aplicativo de chat é voltado para fins educativos e de
+                    aprendizado. Recomendamos que não compartilhe informações
+                    confidenciais ou pessoais como senhas, dados bancários ou
+                    qualquer outro tipo de dado sensível. Sua privacidade é
+                    importante para nós, e estamos comprometidos em manter um
+                    ambiente seguro para o desenvolvimento e troca de
+                    conhecimento. Obrigade pela compreensão!
+                  </p>
+                </div>
+              </div>
+              <div>
+                {data?.messages?.length === 0 && (
+                  <div className={styles.wrapperWelcome}>
+                    <div
+                      className={`${styles.boxWelcome} fadeIn`}
+                      onClick={() => {
+                        POST_MESSAGE(
+                          userLogged!._id,
+                          data?.participants[1]._id as string,
+                          `Olá, ${data.participants[1].name}!`
+                        );
+                      }}
+                    >
+                      <Image
+                        src={'/message.gif'}
+                        width={100}
+                        height={100}
+                        alt='Ícone de saudação'
+                        unoptimized
+                      />
+                      <p>{`Diga "Olá, ${otherParticipant?.name}!"`}</p>
                     </div>
-                  )}
+                  </div>
+                )}
 
-                  {sortedDates?.map((date, i) => {
-                    return (
-                      <div key={`${date}${i}`}>
-                        <div className={styles.dateGrouped}>
-                          <p>
-                            {date === todayDate
-                              ? 'Hoje'
-                              : date === yesterdayDate
-                              ? 'Ontem'
-                              : date}
-                          </p>
-                        </div>
-                        <div className={styles.boxMessagesGrouped}>
-                          {messagesPerDate[date]?.map((m, i, arr) => (
-                            <div
-                              ref={
-                                i === arr.length - 1 ? refBoxLastMessage : null
-                              }
-                              key={`${i} `}
-                              className={`${styles.boxMessage}
+                {sortedDates?.map((date, i) => {
+                  return (
+                    <div key={`${date}${i}`}>
+                      <div className={styles.dateGrouped}>
+                        <p>
+                          {date === todayDate
+                            ? 'Hoje'
+                            : date === yesterdayDate
+                            ? 'Ontem'
+                            : date}
+                        </p>
+                      </div>
+                      <div className={styles.boxMessagesGrouped}>
+                        {messagesPerDate[date]?.map((m, i, arr) => (
+                          <div
+                            ref={
+                              i === arr.length - 1 ? refBoxLastMessage : null
+                            }
+                            key={m._id}
+                            className={`${styles.boxMessage}
             ${
               m.senderId === userLogged?._id
                 ? styles.myBoxMessages
                 : styles.yourBoxMessages
-            }`}
-                            >
-                              <p
-                                key={i}
-                                className={
-                                  `${styles.message} ${
-                                    m.senderId === userLogged?._id
-                                      ? styles.myMessages
-                                      : styles.yourMessages
-                                  }` + ' fadeIn'
-                                }
-                                style={{
-                                  animationDelay: `${i / 50}s`,
-                                }}
-                              >
-                                {m.text}
-                                <span
-                                  className={styles.timeStamp}
+            } fadeIn`}
+                            onMouseEnter={() => setActiveInfoMessage(m._id)}
+                            onMouseLeave={() => setActiveInfoMessage(null)}
+                          >
+                            {activeInfoMessage === m._id &&
+                              userLogged?._id === m.senderId && (
+                                <div
+                                  className={`${styles.boxDeleteMessage} fadeIn`}
                                   style={{
-                                    alignSelf:
+                                    justifyContent:
                                       m.senderId === userLogged?._id
                                         ? 'flex-end'
                                         : 'flex-start',
                                   }}
                                 >
+                                  <FontAwesomeIcon
+                                    icon={faTrashAlt}
+                                    className={styles.iconDeleteMessageItem}
+                                    onClick={() =>
+                                      handleClickCleanMessage(m._id)
+                                    }
+                                  />
+                                </div>
+                              )}
+
+                            <span
+                              key={i}
+                              className={`${styles.message} ${
+                                m.senderId === userLogged?._id
+                                  ? styles.myMessages
+                                  : styles.yourMessages
+                              }`}
+                            >
+                              {m.text}
+                              <span
+                                className={styles.boxTimeStampAndRead}
+                                style={{
+                                  justifyContent:
+                                    m.senderId === userLogged?._id
+                                      ? 'flex-end'
+                                      : 'flex-start',
+                                }}
+                              >
+                                <p>
                                   {new Date(m.sentAt)
                                     .toLocaleTimeString('pt-BR')
                                     .slice(0, 5)}
-                                </span>
-                              </p>
-                            </div>
-                          ))}
-                        </div>
+                                </p>
+
+                                <FontAwesomeIcon icon={faCheck} />
+                              </span>
+                            </span>
+                          </div>
+                        ))}
                       </div>
-                    );
-                  })}
-                </div>
-              </MagicMotion>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
             <form
               action={() => {

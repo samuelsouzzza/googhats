@@ -8,10 +8,11 @@ export interface IUser {
 }
 
 export interface IMessage {
+  _id: string;
   senderId: string;
   text: string;
   sentAt: Date;
-  readBy: string[];
+  read: boolean;
 }
 
 export interface IChat {
@@ -20,4 +21,11 @@ export interface IChat {
   messages: IMessage[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface IModalActions {
+  icon?: IconDefinition;
+  type: 'yes-no' | 'ok';
+  message: string;
+  onOk: () => void | null;
 }

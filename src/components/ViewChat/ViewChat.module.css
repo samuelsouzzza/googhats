@@ -77,7 +77,9 @@
   display: flex;
   margin-top: 1%;
   padding: 0 1%;
+  opacity: 0;
 }
+
 .boxDateGrouped {
   display: flex;
   flex-direction: column;
@@ -102,19 +104,38 @@
   border-radius: 10px;
   max-width: 80%;
   position: relative;
-  opacity: 0;
   display: flex;
   flex-direction: column;
-  word-break: break-all;
+  transition: transform 0.3s ease;
+  /* word-break: break-all; */
 }
-.timeStamp {
+
+.boxDeleteMessage {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+  width: 20%;
+  margin: 0 1%;
+  font-size: 0.8rem;
+  color: var(--font-color-secondary);
+  transition: 0.5s;
+  cursor: pointer;
+}
+.deleteMessageItem:hover {
+  transform: scale(1.25);
+}
+.boxTimeStampAndRead {
   font-size: 0.6rem;
+  display: flex;
+  gap: 0 5px;
+  width: 100%;
 }
 .myBoxMessages {
   justify-content: flex-end;
 }
 .yourBoxMessages {
-  justify-content: flex-start;
+  justify-content: flex-end;
+  flex-flow: row-reverse;
 }
 .myMessages {
   background-color: var(--primary);
@@ -172,4 +193,26 @@
   padding: 1%;
   flex-direction: column;
   cursor: pointer;
+}
+.boxMessageWarning {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.messageWarning {
+  width: 50%;
+  border: 1px solid yellow;
+  color: yellow;
+  border-radius: 10px;
+  padding: 1%;
+  background-color: var(--border);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 0.75rem;
 }

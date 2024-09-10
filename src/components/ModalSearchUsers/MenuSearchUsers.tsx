@@ -32,6 +32,11 @@ export const MenuSearchUsers = () => {
               style={{ fontSize: '0.9rem' }}
             />
           </form>
+          <p className={styles.limitChat}>
+            Você só pode pesquisar e iniciar conversas com usuários com os quais
+            ainda não possui uma conversa ativa. Para continuar uma conversa
+            existente, acesse a lista de chats abertos.
+          </p>
           <div className={styles.boxListUsers}>
             <SearchedUsers
               fetchPath={

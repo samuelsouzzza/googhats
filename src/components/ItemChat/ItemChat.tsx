@@ -26,11 +26,15 @@ export const ItemChat = ({ data, ...props }: ItemChatProps) => {
         <div className={styles.boxTextItem}>
           <p className={styles.nameContact}>{otherParticipant?.name}</p>
           <p className={styles.previewMessage}>
-            {data.messages[data.messages.length - 1]?.text || ''}
+            {data.messages[data?.messages?.length - 1]?.text || ''}
           </p>
         </div>
       </div>
-      <p className={styles.updatedChat}>{formatUpdatedChat(data?.updatedAt)}</p>
+      <div className={styles.boxInfoChat}>
+        <p className={styles.updatedChat}>
+          {formatUpdatedChat(data?.updatedAt)}
+        </p>
+      </div>
     </div>
   );
 };

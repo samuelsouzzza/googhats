@@ -1,9 +1,9 @@
 'use server';
 
-export const POST_STATUS = async (id: string, status: boolean) => {
+export const PUT_STATUS = async (id: string, status: boolean) => {
   try {
     await fetch(`http://localhost:3333/updateUser/${id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },

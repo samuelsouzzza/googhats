@@ -49,3 +49,25 @@
   font-size: 0.7rem;
   width: min-content;
 }
+.boxInfoChat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 35%;
+}
+.countNoReads {
+  font-size: 0.65rem;
+  background-color: var(--font-color);
+  color: var(--background);
+  font-weight: 900;
+  padding: 3%;
+  border-radius: 100px;
+  width: 15px;
+  height: 15px;
+  aspect-ratio: 3/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

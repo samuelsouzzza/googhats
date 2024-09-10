@@ -1,0 +1,64 @@
+.wrapper {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--border);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 50;
+}
+.container {
+  width: 300px;
+  height: auto;
+  border-radius: 5px;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+}
+.container > svg {
+  font-size: 2.5rem;
+}
+.container > svg path {
+  color: var(--primary-color);
+}
+.container > p {
+  text-align: center;
+  width: 100%;
+  margin: 5% 0;
+}
+.boxButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1%;
+  width: 100%;
+}
+.button {
+  height: 35px;
+  width: 20%;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.primaryButton {
+  background-color: var(--font-color);
+  color: var(--background);
+}
+.secondaryButton {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  color: var(--font-color);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  background-color: var(--primary);
+  color: var(--font-color);
+}

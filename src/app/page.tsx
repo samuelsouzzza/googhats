@@ -6,9 +6,10 @@ import { ViewChat } from '@/components/ViewChat/ViewChat';
 import { UseGlobalContext } from '@/globals/GlobalContext';
 import React from 'react';
 import { redirectPath } from '@/utils/redirectPath';
+import { ModalActions } from '@/components/ModalActions/ModalActions';
 
 export default function Home() {
-  const { openedChat, userLogged } = UseGlobalContext();
+  const { openedChat, userLogged, modalActions } = UseGlobalContext();
 
   React.useEffect(() => {
     if (!userLogged) redirectPath('/auth');
@@ -19,6 +20,7 @@ export default function Home() {
       <TopBar />
       <Chats />
       <ViewChat open={openedChat} />
+      {modalActions && <ModalActions />}
     </div>
   );
 }

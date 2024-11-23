@@ -82,7 +82,6 @@ export const Chats = () => {
                   key={d._id}
                   data={d}
                   onClick={() => setOpenedChat(d)}
-                  style={{ animationDelay: `${i / 10}s` }}
                 />
               ))}
           </div>

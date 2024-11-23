@@ -34,6 +34,7 @@ export const ViewChat = ({ open }: ViewChatProps) => {
   const otherParticipant = open?.participants.find(
     (p) => p._id !== userLogged?._id
   );
+  // console.log('OUTRO PARTICIPANTE', otherParticipant);
 
   const getUniqueChat = (...args: Parameters<typeof fetch>) =>
     fetch(...args).then((res) => res.json());
@@ -45,6 +46,8 @@ export const ViewChat = ({ open }: ViewChatProps) => {
     getUniqueChat,
     { refreshInterval: 1000, shouldRetryOnError: false }
   );
+
+  // console.log(data);
 
   React.useEffect(() => {
     refBoxLastMessage.current?.scrollIntoView();
@@ -226,11 +229,13 @@ export const ViewChat = ({ open }: ViewChatProps) => {
                       <div className={styles.boxMessagesGrouped}>
                         {messagesPerDate[date]?.map((m, i, arr) => (
                           <div
+                            style={{ animationDelay: `${i / 10}s` }}
                             ref={
                               i === arr.length - 1 ? refBoxLastMessage : null
                             }
                             key={m._id}
                             className={`${styles.boxMessage}
+                            
             ${
               m.senderId === userLogged?._id
                 ? styles.myBoxMessages
@@ -284,7 +289,9 @@ export const ViewChat = ({ open }: ViewChatProps) => {
                                     .slice(0, 5)}
                                 </p>
 
-                                <FontAwesomeIcon icon={faCheck} />
+                                {userLogged!._id === m.senderId && (
+                                  <FontAwesomeIcon icon={faCheck} />
+                                )}
                               </span>
                             </span>
                           </div>

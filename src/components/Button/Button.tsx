@@ -11,13 +11,7 @@ type ButtonProps = React.ComponentProps<'button'> & {
   icon?: IconProp;
 };
 
-export const Button = ({
-  children,
-  type,
-  text,
-  icon,
-  ...props
-}: ButtonProps) => {
+export const Button = ({ children, text, icon, ...props }: ButtonProps) => {
   const { pending } = useFormStatus();
 
   return (

@@ -185,7 +185,7 @@ export const ViewChat = ({ open }: ViewChatProps) => {
                     qualquer outro tipo de dado sensível. Sua privacidade é
                     importante para nós, e estamos comprometidos em manter um
                     ambiente seguro para o desenvolvimento e troca de
-                    conhecimento. Obrigade pela compreensão!
+                    conhecimento. Obrigado pela compreensão!
                   </p>
                 </div>
               </div>
